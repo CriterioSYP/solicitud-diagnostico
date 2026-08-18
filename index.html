@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criterio SYP — Seguridad e Higiene Laboral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F3EE;
+    --paper-raised:#FFFFFF;
+    --ink:#1A2430;
+    --ink-soft:#4B5563;
+    --navy:#12324A;
+    --navy-deep:#0B2233;
+    --amber:#E8A324;
+    --amber-deep:#B9800F;
+    --green:#3E6B4F;
+    --line:#D8D3C6;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.01em;
+    color:var(--navy-deep);
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,243,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:1.15rem;
+    color:var(--navy-deep);
+  }
+  .brand-mark{
+    width:26px; height:26px;
+    background:var(--navy);
+    border-radius:6px;
+    position:relative;
+    flex-shrink:0;
+  }
+  .brand-mark::after{
+    content:"";
+    position:absolute; inset:6px;
+    border:2px solid var(--amber);
+    border-radius:3px;
+  }
+  nav ul{
+    display:flex; gap:32px; list-style:none;
+  }
+  nav a{
+    text-decoration:none; color:var(--ink-soft);
+    font-size:0.92rem; font-weight:500;
+    transition:color .15s;
+  }
+  nav a:hover{color:var(--navy);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--navy);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:8px;
+    font-weight:600; font-size:0.9rem;
+    text-decoration:none;
+    border:1px solid var(--navy);
+    transition:background .15s, transform .1s;
+  }
+  .btn:hover{background:var(--navy-deep);}
+  .btn:focus-visible, a:focus-visible, button:focus-visible{
+    outline:3px solid var(--amber); outline-offset:2px;
+  }
+  .btn-ghost{
+    background:transparent; color:var(--navy); border:1px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--navy); background:var(--paper-raised);}
+
+  /* HERO */
+  .hero{
+    padding:76px 0 64px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--amber-deep);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px; border-radius:50%;
+    background:var(--amber);
+  }
+  .hero h1{
+    font-size:2.7rem;
+    line-height:1.08;
+    font-weight:700;
+    margin-bottom:20px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--amber-deep);
+  }
+  .hero p.lead{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin-bottom:30px;
+  }
+  .hero-ctas{
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+
+  /* TAG — signature element, modeled on an equipment inspection plate */
+  .tag{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 26px 22px;
+    position:relative;
+    box-shadow:0 18px 40px -22px rgba(11,34,51,0.35);
+  }
+  .tag::before{
+    content:"";
+    position:absolute; top:-9px; left:26px;
+    width:18px; height:18px;
+    background:var(--navy);
+    border-radius:50%;
+    border:3px solid var(--paper);
+  }
+  .tag-stripe{
+    position:absolute; left:0; top:0; bottom:0; width:8px;
+    border-radius:var(--radius) 0 0 var(--radius);
+    background:repeating-linear-gradient(
+      -45deg,
+      var(--amber), var(--amber) 6px,
+      var(--navy-deep) 6px, var(--navy-deep) 12px
+    );
+  }
+  .tag-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:18px; padding-left:14px;
+  }
+  .tag-head .mono{color:var(--ink-soft);}
+  .tag-status{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#EAF2EC; color:var(--green);
+    padding:4px 10px; border-radius:20px;
+    font-size:0.68rem; font-weight:600;
+  }
+  .tag-status::before{
+    content:""; width:6px; height:6px; border-radius:50%; background:var(--green);
+  }
+  .tag-row{
+    display:flex; justify-content:space-between;
+    padding:11px 0 11px 14px;
+    border-top:1px dashed var(--line);
+    font-size:0.86rem;
+  }
+  .tag-row:first-of-type{border-top:none;}
+  .tag-row span:first-child{color:var(--ink-soft);}
+  .tag-row span:last-child{font-weight:600; color:var(--navy-deep); text-align:right;}
+  .tag-foot{
+    margin-top:16px; padding-top:14px; padding-left:14px;
+    border-top:1px solid var(--line);
+    font-size:0.76rem; color:var(--ink-soft);
+  }
+
+  /* WHY / URGENCY STRIP */
+  .strip{
+    background:var(--navy-deep);
+    color:#EFEDE6;
+    padding:36px 0;
+  }
+  .strip .wrap{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+  }
+  .strip-item .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--amber);
+    font-size:1.6rem;
+    font-weight:600;
+    display:block;
+    margin-bottom:6px;
+  }
+  .strip-item p{
+    font-size:0.88rem;
+    color:#C7CDD3;
+    max-width:32ch;
+  }
+
+  /* SECTION HEADS */
+  section{padding:84px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:44px;
+  }
+  .section-head .mono{color:var(--amber-deep); display:block; margin-bottom:10px;}
+  .section-head h2{font-size:1.9rem; margin-bottom:12px;}
+  .section-head p{color:var(--ink-soft); font-size:1rem;}
+
+  /* SERVICES */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+  }
+  .service-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 18px;
+    transition:border-color .15s, transform .15s;
+  }
+  .service-card:hover{border-color:var(--amber); transform:translateY(-2px);}
+  .service-card .mono{color:var(--ink-soft); display:block; margin-bottom:10px;}
+  .service-card h3{font-size:0.98rem; font-weight:600; color:var(--navy-deep); line-height:1.3;}
+
+  /* METHODOLOGY — real sequence, numbered on purpose */
+  .method{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .method-row{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .method-row:last-child{border-bottom:none;}
+  .method-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    color:var(--amber-deep);
+    background:#FAF7F0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.95rem;
+    border-right:1px solid var(--line);
+  }
+  .method-body{
+    padding:20px 24px;
+  }
+  .method-body h3{font-size:1rem; margin-bottom:4px; color:var(--navy-deep);}
+  .method-body p{font-size:0.9rem; color:var(--ink-soft);}
+
+  /* TEAM */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .team-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+  }
+  .team-avatar{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--navy);
+    color:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  .team-card h3{font-size:1.02rem; margin-bottom:2px;}
+  .team-role{
+    color:var(--amber-deep);
+    font-size:0.8rem; font-weight:600;
+    margin-bottom:10px;
+  }
+  .team-card p{font-size:0.88rem; color:var(--ink-soft);}
+
+  /* CONTACT */
+  .contact{
+    background:var(--navy-deep);
+    color:#EFEDE6;
+    border-radius:20px;
+    padding:52px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:40px;
+    align-items:center;
+  }
+  .contact h2{color:#fff; font-size:1.8rem; margin-bottom:14px;}
+  .contact p{color:#C7CDD3; max-width:44ch;}
+  .contact-cta{margin-top:24px; display:flex; gap:14px; flex-wrap:wrap;}
+  .contact .btn-ghost{color:#fff; border-color:#3A4E5E;}
+  .contact .btn-ghost:hover{background:#173247;}
+  .contact-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid #2B3F4F;
+    border-radius:12px;
+    padding:22px;
+  }
+  .contact-line{
+    display:flex; justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #26394A;
+    font-size:0.88rem;
+  }
+  .contact-line:last-child{border-bottom:none;}
+  .contact-line span:first-child{color:#8FA0AD;}
+  .contact-line span:last-child{font-weight:600;}
+
+  footer{
+    padding:28px 0 40px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:0.8rem;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .strip .wrap{grid-template-columns:1fr; gap:20px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .team-grid{grid-template-columns:1fr;}
+    .contact{grid-template-columns:1fr; padding:32px;}
+    nav ul{display:none;}
+    .hero h1{font-size:2.1rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">
+        <span class="brand-mark"></span>
+        Criterio SYP
+      </div>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#metodologia">Metodología</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn" href="#contacto">Solicitar diagnóstico</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow mono">Consultora en Seguridad e Higiene Laboral</span>
+      <h1>El <em>criterio técnico</em> que tu empresa necesita para cumplir sin sorpresas.</h1>
+      <p class="lead">Asesoramiento profesional en Higiene y Seguridad, Ley 19.587 y Decreto 1338/96, para PyMEs industriales y comerciales de la zona de Pilar y el Parque Industrial. Menos riesgo de multas, más control real sobre la operación diaria.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#contacto">Solicitar diagnóstico gratuito</a>
+        <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+
+    <div class="tag">
+      <div class="tag-stripe"></div>
+      <div class="tag-head">
+        <div>
+          <span class="mono">Ficha de servicio</span>
+        </div>
+        <span class="tag-status">Vigente</span>
+      </div>
+      <div class="tag-row"><span>Marco normativo</span><span>Ley 19.587 · Dec. 351/79</span></div>
+      <div class="tag-row"><span>Servicio profesional</span><span>Dec. 1338/96</span></div>
+      <div class="tag-row"><span>Zona de cobertura</span><span>Pilar · GBA Norte</span></div>
+      <div class="tag-row"><span>Responsable técnico</span><span>Matriculado/a</span></div>
+      <div class="tag-foot mono">Próxima revisión: a definir con el cliente</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item">
+      <span class="num">532.808</span>
+      <p>accidentes laborales reportados en Argentina durante 2024, según la SRT.</p>
+    </div>
+    <div class="strip-item">
+      <span class="num">Dec. 1338/96</span>
+      <p>obliga a los empleadores a contar con asesoramiento profesional en Higiene y Seguridad, según actividad y cantidad de trabajadores.</p>
+    </div>
+    <div class="strip-item">
+      <span class="num">+200</span>
+      <p>empresas radicadas en el Parque Industrial Pilar, el más grande de Argentina.</p>
+    </div>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Servicios</span>
+      <h2>Cobertura completa, de la prevención diaria a la representación ante organismos.</h2>
+      <p>Un solo interlocutor para todo lo que exige la normativa vigente, adaptado al riesgo real de cada actividad.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><span class="mono">01</span><h3>Seguridad operacional</h3></div>
+      <div class="service-card"><span class="mono">02</span><h3>Seguridad edilicia</h3></div>
+      <div class="service-card"><span class="mono">03</span><h3>Planes de evacuación</h3></div>
+      <div class="service-card"><span class="mono">04</span><h3>Cálculo de carga de fuego</h3></div>
+      <div class="service-card"><span class="mono">05</span><h3>Capacitación de personal</h3></div>
+      <div class="service-card"><span class="mono">06</span><h3>Representación ante ART / SRT</h3></div>
+      <div class="service-card"><span class="mono">07</span><h3>Controles periódicos según riesgo</h3></div>
+      <div class="service-card"><span class="mono">08</span><h3>Asesoría presencial inmediata</h3></div>
+    </div>
+  </div>
+</section>
+
+<section id="metodologia">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Metodología</span>
+      <h2>Nuestro plan antisiniestral, paso a paso.</h2>
+      <p>Protegemos la vida de tu personal y clientes, tus instalaciones, y la continuidad del negocio ante incendio, explosión, fuga de gas o inundación.</p>
+    </div>
+    <div class="method">
+      <div class="method-row">
+        <div class="method-num">01</div>
+        <div class="method-body"><h3>Identificación de riesgos</h3><p>Relevamiento in situ de las condiciones reales de la operación.</p></div>
+      </div>
+      <div class="method-row">
+        <div class="method-num">02</div>
+        <div class="method-body"><h3>Medidas de prevención</h3><p>Definición de acciones concretas para reducir cada riesgo detectado.</p></div>
+      </div>
+      <div class="method-row">
+        <div class="method-num">03</div>
+        <div class="method-body"><h3>Plan de evacuación</h3><p>Diseño y validación de rutas, señalética y roles ante una emergencia.</p></div>
+      </div>
+      <div class="method-row">
+        <div class="method-num">04</div>
+        <div class="method-body"><h3>Actuación</h3><p>Protocolos claros de respuesta para el personal en el momento del hecho.</p></div>
+      </div>
+      <div class="method-row">
+        <div class="method-num">05</div>
+        <div class="method-body"><h3>Documentación obligatoria</h3><p>RGRL y toda la documentación exigida por la normativa vigente, al día.</p></div>
+      </div>
+      <div class="method-row">
+        <div class="method-num">06</div>
+        <div class="method-body"><h3>Checklist de seguimiento</h3><p>Control periódico simple para sostener el cumplimiento en el tiempo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Equipo</span>
+      <h2>Experiencia profesional y criterio de prevención.</h2>
+      <p>Un equipo chico, con trato directo y respuesta rápida — sin perder el respaldo técnico que exige la ley.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">AU</div>
+        <h3>Alejandra Ugarte</h3>
+        <div class="team-role">[ Completar rol ]</div>
+        <p>Breve descripción de trayectoria y foco de trabajo.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">MD</div>
+        <h3>Mariano Díaz</h3>
+        <div class="team-role">[ Completar rol ]</div>
+        <p>Breve descripción de trayectoria y foco de trabajo.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">GD</div>
+        <h3>Gabriel Díaz</h3>
+        <div class="team-role">[ Completar rol ]</div>
+        <p>Breve descripción de trayectoria y foco de trabajo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <span class="mono" style="color:var(--amber);">Contacto</span>
+        <h2>Empecemos con un diagnóstico gratuito.</h2>
+        <p>Contanos el rubro y el tamaño de tu empresa y te decimos, sin cargo, si estás obligado a contar con servicio de Higiene y Seguridad.</p>
+        <div class="contact-cta">
+          <a class="btn" href="mailto:contacto@criteriosyp.com.ar">Escribir por mail</a>
+          <a class="btn btn-ghost" href="#">Hablar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-line"><span>Email</span><span>contacto@criteriosyp.com.ar</span></div>
+        <div class="contact-line"><span>Teléfono</span><span>[ A completar ]</span></div>
+        <div class="contact-line"><span>Zona</span><span>Pilar, Buenos Aires</span></div>
+        <div class="contact-line"><span>LinkedIn</span><span>/company/criterio-syp</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Criterio SYP — Seguridad e Higiene Laboral · Nombre de trabajo, sujeto a definición final.
+  </div>
+</footer>
+
+</body>
+</html>
